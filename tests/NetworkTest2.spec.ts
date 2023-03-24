@@ -2,9 +2,9 @@ import { test, expect, request } from "@playwright/test";
 import { APIUtils } from "../utils/APIUtils";
 const orderPayload = {
     orders: [{ country: "India", productOrderedId: "6262e95ae26b7e1a10e89bf0" }]
-}
+};
 const loginPayload = { userEmail: "rahulshetty@gmail.com", userPassword: "Iamking@00" };
-const fakePayLoadOrders = { data: [], message: "No Orders" }
+const fakePayLoadOrders = { data: [], message: "No Orders" };
 let response:any;
 
 test.beforeAll(async () => {
@@ -32,7 +32,7 @@ test('Login test', async ({ page }) => {
 
 
         });
-    })
+    });
 
 
     await page.locator("button:has-text('View')").first().click();
