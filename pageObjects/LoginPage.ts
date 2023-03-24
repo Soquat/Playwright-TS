@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
 
 export class LoginPage {
-    page;
+    page: Page;
     signInButton;
     userNameInput;
     passwordInput;
