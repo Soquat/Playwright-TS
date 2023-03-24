@@ -12,7 +12,6 @@ test_1.test.beforeAll(async () => {
     const apiContext = await test_1.request.newContext();
     const apiUtils = new APIUtils_1.APIUtils(apiContext, loginPayload);
     response = await apiUtils.createOrder(orderPayload);
-    console.log("response");
 });
 (0, test_1.test)('Login test', async ({ page }) => {
     page.addInitScript(value => {

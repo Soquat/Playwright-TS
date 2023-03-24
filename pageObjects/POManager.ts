@@ -3,7 +3,7 @@ import { DashBoardPage } from "./DashBoardPage";
 import { LoginPage } from "./LoginPage";
 
 export class POManager {
-    page;
+    page: Page;
     loginPage: LoginPage;
     dashboardPage: DashBoardPage;
     constructor(page: Page) {
@@ -13,11 +13,11 @@ export class POManager {
     }
 
 
-    getLoginPage() {
+    getLoginPage(): LoginPage {
         return this.loginPage;
     }
 
-    getDashboarPage() {
+    getDashboarPage(): DashBoardPage {
         return this.dashboardPage;
     }
 }

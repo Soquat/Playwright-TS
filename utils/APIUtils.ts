@@ -1,4 +1,4 @@
-import { APIRequestContext } from "@playwright/test";
+import { APIRequestContext, APIResponse } from "@playwright/test";
 import { ILoginPayload } from "./interfaces/ILoginPayload";
 import { IOrderPayload } from "./interfaces/IOrderPayload";
 import { IOrderResponse } from "./interfaces/IOrderResponse";
@@ -13,7 +13,7 @@ export class APIUtils {
         this.loginPayload = loginPayload;
     }
 
-    async getToken() {
+    async getToken(): Promise<string> {
 
         const loginResponse = await this.apiContext.post("https://rahulshettyacademy.com/api/ecom/auth/login", { data: this.loginPayload });
         const loginResponseJson = await loginResponse.json();
@@ -21,13 +21,13 @@ export class APIUtils {
         return token;
     }
 
-    async createOrder(orderPayload: IOrderPayload) {
-        let response: IOrderResponse = {
+    async createOrder(orderPayload: IOrderPayload): Promise<IOrderResponse> {
+        const response: IOrderResponse = {
             token: "",
             orderId: ""
         };
         response.token = await this.getToken();
-        const orderResponse = await this.apiContext.post("https://rahulshettyacademy.com/api/ecom/order/create-order", {
+        const orderResponse: APIResponse = await this.apiContext.post("https://rahulshettyacademy.com/api/ecom/order/create-order", {
             data: orderPayload,
             headers: {
                 'Authorization': response.token,
@@ -35,8 +35,8 @@ export class APIUtils {
             }
         });
         console.log(orderResponse);
-        const orderResponseJson = await orderResponse.json();
-        const orderId = orderResponseJson.orders[0];
+        const orderResponseJson: { orders: string[] } = await orderResponse.json();
+        const orderId: string = orderResponseJson.orders[0];
         response.orderId = orderId;
         return response;
     }

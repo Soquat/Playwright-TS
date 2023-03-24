@@ -12,7 +12,6 @@ for (const data of dataSet) {
     (0, test_1.test)(`@Web Login test with ${data.productName}`, async ({ page }) => {
         const poManager = new POManager_1.POManager(page);
         const loginPage = poManager.getLoginPage();
-        const products = page.locator(".card-body");
         await loginPage.goTo();
         await loginPage.validLogin(data.userName, data.password);
         const dashBoardPage = poManager.getDashboarPage();
@@ -23,7 +22,6 @@ for (const data of dataSet) {
 (0, test_base_1.default)(` Client App login`, async ({ page, testDataForOrder }) => {
     const poManager = new POManager_1.POManager(page);
     const loginPage = poManager.getLoginPage();
-    const products = page.locator(".card-body");
     await loginPage.goTo();
     await loginPage.validLogin(testDataForOrder.userName, testDataForOrder.password);
     const dashBoardPage = poManager.getDashboarPage();

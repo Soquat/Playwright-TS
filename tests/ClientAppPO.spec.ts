@@ -4,17 +4,15 @@ import customtest from '../utils/test-base';
 import dataImport from '../utils/placeorderTestData.json';
 import { LoginPage } from '../pageObjects/LoginPage';
 import { DashBoardPage } from '../pageObjects/DashBoardPage';
+import { ITestDataSet } from '../utils/interfaces/ITestDataSet';
 
-
-
-const dataSet = JSON.parse(JSON.stringify(dataImport));
+const dataSet: ITestDataSet[] = JSON.parse(JSON.stringify(dataImport));
 
 for (const data of dataSet) {
-    test(`@Web Login test with ${data.productName}`, async ({ page }) => {
+    test(`@Web Login test with ${data.productName}`, async ({ page }): Promise<void> => {
 
         const poManager: POManager = new POManager(page);
         const loginPage: LoginPage = poManager.getLoginPage();
-        const products = page.locator(".card-body");
         await loginPage.goTo();
         await loginPage.validLogin(data.userName, data.password);
 
@@ -26,11 +24,10 @@ for (const data of dataSet) {
     });
 }
 
-customtest(` Client App login`, async ({ page, testDataForOrder }) => {
+customtest(` Client App login`, async ({ page, testDataForOrder }): Promise<void> => {
 
     const poManager: POManager = new POManager(page);
     const loginPage: LoginPage = poManager.getLoginPage();
-    const products = page.locator(".card-body");
     await loginPage.goTo();
     await loginPage.validLogin(testDataForOrder.userName, testDataForOrder.password);
 

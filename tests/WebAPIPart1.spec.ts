@@ -1,22 +1,23 @@
-import { test, expect, request } from "@playwright/test";
+import { test, expect, request, APIRequestContext, Locator } from "@playwright/test";
 import { APIUtils } from "../utils/APIUtils";
-const orderPayload = {
+import { ILoginPayload } from "../utils/interfaces/ILoginPayload";
+import { IOrderPayload } from "../utils/interfaces/IOrderPayload";
+import { IOrderResponse } from "../utils/interfaces/IOrderResponse";
+
+const orderPayload: IOrderPayload = {
     orders: [{ country: "India", productOrderedId: "6262e95ae26b7e1a10e89bf0" }]
-}
-const loginPayload = { userEmail: "anshika@gmail.com", userPassword: "Iamking@000" };
-let response: any;
+};
+const loginPayload: ILoginPayload = { userEmail: "anshika@gmail.com", userPassword: "Iamking@000" };
+let response: IOrderResponse;
 
 test.beforeAll(async () => {
-    const apiContext = await request.newContext();
-    const apiUtils = new APIUtils(apiContext, loginPayload);
+    const apiContext: APIRequestContext = await request.newContext();
+    const apiUtils: APIUtils = new APIUtils(apiContext, loginPayload);
     response = await apiUtils.createOrder(orderPayload);
-    console.log("response")
-
-
 });
 
 
-test('Login test', async ({ page }) => {
+test('Login test', async ({ page }): Promise<void> => {
     page.addInitScript(value => {
         window.localStorage.setItem("token", value);
     }, response.token);
@@ -24,10 +25,6 @@ test('Login test', async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/client");
     await page.locator("button[routerlink*='myorders']").click();
     await page.locator("tbody").waitFor();
-    const rows = await page.locator("tbody tr");
-
-    for (let i = 0; i < await rows.count(); i++) {
-
-    }
+    const rows: Locator = await page.locator("tbody tr");
 
 });

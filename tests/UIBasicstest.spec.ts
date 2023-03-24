@@ -1,28 +1,27 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, BrowserContext, Page, Locator } from '@playwright/test';
 
-test('Page Playwright test', async ({ page }) => {
+test('Page Playwright test', async ({ page }): Promise<void> => {
     await page.goto("https://google.com");
-    const title = await page.title();
-    console.log(title);
+    const title: string = await page.title();
     await expect(page).toHaveTitle("Google");
 
 });
 
-test('Browser Content Playwright test', async ({ browser }) => {
-    const context = await browser.newContext();
-    const page = await context.newPage();
+test('Browser Content Playwright test', async ({ browser }): Promise<void> => {
+    const context: BrowserContext = await browser.newContext();
+    const page: Page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-    const title = await page.title();
-    const cardTitles = await page.locator(".card-body a");
+    const title: string = await page.title();
+    const cardTitles: Locator = await page.locator(".card-body a");
     console.log(title);
     //selectors
-    const username = page.locator('#username');
-    const pw = page.locator("[type='password']");
-    const signIn = page.locator("#signInBtn");
+    const username: Locator = page.locator('#username');
+    const pw: Locator = page.locator("[type='password']");
+    const signIn: Locator = page.locator("#signInBtn");
     await username.type("Michael");
     await pw.type("test");
     await signIn.click();
-    const errorMessage = await page.locator("[style*='block']").textContent();
+    const errorMessage: string | null = await page.locator("[style*='block']").textContent();
     console.log(errorMessage);
     await expect(page.locator("[style*='block']")).toContainText("Incorrect");
 
@@ -37,23 +36,17 @@ test('Browser Content Playwright test', async ({ browser }) => {
         ]
     );
 
-    //console.log(await cardTitles.nth(0).textContent());
-    const allTitles = await cardTitles.allTextContents();
-    console.log(allTitles);
-
-})
+    const allTitles: string[] = await cardTitles.allTextContents();
+});
 
 
 
-test('UI Controls', async ({ page }) => {
+test('UI Controls', async ({ page }): Promise<void> => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-    const username = page.locator('#username');
-    const pw = page.locator("[type='password']");
-    const signIn = page.locator("#signInBtn");
-    const dropdown = page.locator("[data-style='btn-info'] ");
+    const username: Locator = page.locator('#username');
+    const pw: Locator = page.locator("[type='password']");
     await username.fill("rahulshettyacademy");
     await pw.fill("learning");
-    await dropdown.selectOption("consult")
 
     await page.locator(".radiotextsty").last().click();
     await page.locator("#okayBtn").click();
@@ -65,10 +58,10 @@ test('UI Controls', async ({ page }) => {
     await expect(page.locator("[href='https://rahulshettyacademy.com/documents-request']")).toHaveAttribute("class", "blinkingText");
 });
 
-test('Child windows', async ({ browser }) => {
+test('Child windows', async ({ browser }): Promise<void> => {
 
-    const context = await browser.newContext();
-    const page = await context.newPage();
+    const context: BrowserContext = await browser.newContext();
+    const page: Page = await context.newPage();
 
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     const documentLink = page.locator("[href='https://rahulshettyacademy.com/documents-request']");
@@ -79,12 +72,12 @@ test('Child windows', async ({ browser }) => {
         documentLink.click()
     ]);
 
-    const text = await newPage.locator(".red").textContent();
+    const text: string | null = await newPage.locator(".red").textContent();
     if (text !== null) {
-        const array = text.split("@");
-        const domain = array[1].split(" ")[0];
+        const array: Array<string> = text.split("@");
+        const domain: string = array[1].split(" ")[0];
         console.log(domain);
-        const username = page.locator('#username');
+        const username: Locator = page.locator('#username');
 
         await username.type(domain);
     }

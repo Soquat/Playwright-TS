@@ -4,7 +4,6 @@ const test_1 = require("@playwright/test");
 (0, test_1.test)('Page Playwright test', async ({ page }) => {
     await page.goto("https://google.com");
     const title = await page.title();
-    console.log(title);
     await (0, test_1.expect)(page).toHaveTitle("Google");
 });
 (0, test_1.test)('Browser Content Playwright test', async ({ browser }) => {
@@ -32,19 +31,14 @@ const test_1 = require("@playwright/test");
         page.waitForLoadState(),
         signIn.click()
     ]);
-    //console.log(await cardTitles.nth(0).textContent());
     const allTitles = await cardTitles.allTextContents();
-    console.log(allTitles);
 });
 (0, test_1.test)('UI Controls', async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     const username = page.locator('#username');
     const pw = page.locator("[type='password']");
-    const signIn = page.locator("#signInBtn");
-    const dropdown = page.locator("[data-style='btn-info'] ");
     await username.fill("rahulshettyacademy");
     await pw.fill("learning");
-    await dropdown.selectOption("consult");
     await page.locator(".radiotextsty").last().click();
     await page.locator("#okayBtn").click();
     await (0, test_1.expect)(page.locator(".radiotextsty").last()).toBeChecked();

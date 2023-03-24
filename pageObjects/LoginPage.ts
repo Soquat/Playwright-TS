@@ -1,10 +1,10 @@
-import { Page } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 
 export class LoginPage {
     page: Page;
-    signInButton;
-    userNameInput;
-    passwordInput;
+    signInButton: Locator;
+    userNameInput: Locator;
+    passwordInput: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -14,15 +14,14 @@ export class LoginPage {
 
     }
 
-    async goTo() {
+    async goTo(): Promise<void> {
         await this.page.goto("https://rahulshettyacademy.com/client");
     }
 
-    async validLogin(userName: string, password: string) {
+    async validLogin(userName: string, password: string): Promise<void> {
         await this.userNameInput.fill(userName);
         await this.passwordInput.type(password);
         await this.signInButton.click();
         await this.page.waitForLoadState('networkidle');
     }
-
 }

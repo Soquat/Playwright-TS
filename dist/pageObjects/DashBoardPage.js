@@ -9,7 +9,7 @@ class DashBoardPage {
         this.cart = page.locator("[routerlink*='cart']");
     }
     async searchProductAddCart(productName) {
-        const titles = this.productsText.allTextContents();
+        const titles = await this.productsText.allTextContents();
         console.log(titles);
         const count = await this.products.count();
         for (let i = 0; i < count; i++) {

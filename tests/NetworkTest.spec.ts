@@ -4,12 +4,9 @@ import { IOrderResponse } from "../utils/interfaces/IOrderResponse";
 import { ILoginPayload } from "../utils/interfaces/ILoginPayload";
 import { IOrderPayload } from "../utils/interfaces/IOrderPayload";
 
-
-
-
 const orderPayload: IOrderPayload = {
     orders: [{ country: "India", productOrderedId: "6262e95ae26b7e1a10e89bf0" }]
-}
+};
 const loginPayload: ILoginPayload = { userEmail: "anshika@gmail.com", userPassword: "Iamking@000" };
 const fakePayLoadOrders: Object = { data: [], message: "No Orders" };
 let response: IOrderResponse;
@@ -21,12 +18,10 @@ test.beforeAll(async () => {
 });
 
 
-
-
-test('Login test', async ({ page }) => {
+test('Login test', async ({ page }): Promise<void> => {
     await page.addInitScript((token: string) => {
         localStorage.setItem('token', token);
-    }, response.token);
+    }, response.token as string);
 
     await page.goto('https://rahulshettyacademy.com/client');
 
@@ -35,7 +30,7 @@ test('Login test', async ({ page }) => {
         async (route, request) => {
             const response = await route.request().response();
 
-            let body = JSON.stringify(fakePayLoadOrders);
+            let body: string = JSON.stringify(fakePayLoadOrders);
             route.fulfill({
                 status: 200,
                 contentType: 'application/json',

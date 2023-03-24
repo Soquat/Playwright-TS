@@ -1,12 +1,12 @@
 
-import { test, expect, request } from "@playwright/test";
-let webContext: any;
+import { test, expect, request, BrowserContext, Page, Locator } from "@playwright/test";
+let webContext: BrowserContext;
 
 
-test.beforeAll(async ({ browser }) => {
-    const email = "anshika@gmail.com";
-    const context = await browser.newContext();
-    const page = await context.newPage();
+test.beforeAll(async ({ browser }): Promise<void> => {
+    const email: string = "anshika@gmail.com";
+    const context: BrowserContext = await browser.newContext();
+    const page: Page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/client");
     await page.locator("#userEmail").fill(email);
     await page.locator("#userPassword").type("Iamking@000");
@@ -18,23 +18,23 @@ test.beforeAll(async ({ browser }) => {
 });
 
 
-test('Login test', async () => {
-    const productName = "zara coat 3";
-    const email = "anshika@gmail.com";
+test('Login test', async (): Promise<void> => {
+    const productName: string = "zara coat 3";
+    const email: string = "anshika@gmail.com";
 
 
-    const page = await webContext.newPage();
-    const products = page.locator(".card-body");
+    const page: Page = await webContext.newPage();
+    const products: Locator = page.locator(".card-body");
 
 
     await page.goto("https://rahulshettyacademy.com/client");
 
-    const titles = await page.locator(".card-body b").allTextContents();
+    const titles: string[] = await page.locator(".card-body b").allTextContents();
     console.log(titles);
-    const count = await products.count();
+    const count: number = await products.count();
 
     for (let i = 0; i < count; i++) {
-        let text = await products.nth(i).locator("b").textContent();
+        let text: string | null = await products.nth(i).locator("b").textContent();
         if (text === productName) {
             await products.nth(i).locator("text=Add To Cart").click();
         }
@@ -42,17 +42,17 @@ test('Login test', async () => {
 
     await page.locator("[routerlink*='cart']").click();
     await page.locator("div li").first().waitFor();
-    const bool = await page.locator("h3:has-text('zara coat 3')").isVisible();
+    const bool: boolean = await page.locator("h3:has-text('zara coat 3')").isVisible();
     expect(bool).toBeTruthy();
 
     await page.locator("text=Checkout").click();
     await page.locator("[placeholder='Select Country']").type("ind", { delay: 100 });
-    const dropdown = await page.locator(".ta-results");
+    const dropdown: Locator = await page.locator(".ta-results");
     await dropdown.waitFor();
-    const optionsCount = await dropdown.locator("button").count();
+    const optionsCount: number = await dropdown.locator("button").count();
 
     for (let i = 0; i < optionsCount; i++) {
-        let text = await dropdown.locator("button").nth(i).textContent();
+        let text: string | null = await dropdown.locator("button").nth(i).textContent();
         if (text === " India") {
             await dropdown.locator("button").nth(i).click();
             break;
@@ -64,7 +64,7 @@ test('Login test', async () => {
 
     await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
 
-    const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
+    const orderId: string | null = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
     console.log(orderId);
 
 });
