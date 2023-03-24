@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx eslint ./dist/tests
+
+# npx husky set .hustky/pre-commit "npx exlint ./dist/tests"

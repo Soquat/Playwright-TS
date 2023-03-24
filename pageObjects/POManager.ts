@@ -20,4 +20,9 @@ export class POManager {
     getDashboarPage(): DashBoardPage {
         return this.dashboardPage;
     }
+
+    getPage(): Page {
+        return this.page;
+    }
+
 }

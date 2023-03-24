@@ -15,5 +15,8 @@ class POManager {
     getDashboarPage() {
         return this.dashboardPage;
     }
+    getPage() {
+        return this.page;
+    }
 }
 exports.POManager = POManager;

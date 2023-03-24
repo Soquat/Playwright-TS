@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DashBoardPage = void 0;
-class DashBoardPage {
+const BasePage_1 = require("./BasePage");
+class DashBoardPage extends BasePage_1.BasePage {
     constructor(page) {
-        this.page = page;
+        super(page);
+        this.headerTextLocator = this.page.locator("div[class='left mt-1'] h3");
         this.products = page.locator(".card-body");
         this.productsText = page.locator(".card-body b");
         this.cart = page.locator("[routerlink*='cart']");
@@ -22,6 +24,9 @@ class DashBoardPage {
     }
     async navigateToCart() {
         await this.cart.click();
+    }
+    async getHeaderText() {
+        return await this.getTextContent(this.headerTextLocator);
     }
 }
 exports.DashBoardPage = DashBoardPage;

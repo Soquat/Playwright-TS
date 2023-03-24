@@ -16,6 +16,7 @@ for (const data of dataSet) {
         await loginPage.validLogin(data.userName, data.password);
         const dashBoardPage = poManager.getDashboarPage();
         await dashBoardPage.searchProductAddCart(data.productName);
+        (0, test_1.expect)(await page.locator("div[class='left mt-1'] h3")).toHaveText("Automation");
     });
 }
 (0, test_base_1.default)(` Check H3 equals Automation`, async ({ page, testDataForOrder }) => {
@@ -23,5 +24,6 @@ for (const data of dataSet) {
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(testDataForOrder.userName, testDataForOrder.password);
-    await (0, test_1.expect)(page.locator("div[class='left mt-1'] h3")).toHaveText("Automation");
+    const dashboardPage = poManager.getDashboarPage();
+    await (0, test_1.expect)(await dashboardPage.getHeaderText()).toEqual("Automation");
 });

@@ -1,14 +1,14 @@
 import { Locator, Page } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class DashBoardPage {
-    page: Page;
+export class DashBoardPage extends BasePage {
     products: Locator;
     productsText: Locator;
     cart: Locator;
-
+    private readonly headerTextLocator: Locator = this.page.locator("div[class='left mt-1'] h3");
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.products = page.locator(".card-body");
         this.productsText = page.locator(".card-body b");
         this.cart = page.locator("[routerlink*='cart']");
@@ -30,5 +30,9 @@ export class DashBoardPage {
 
     async navigateToCart(): Promise<void> {
         await this.cart.click();
+    }
+
+    async getHeaderText(): Promise<string | null> {
+        return await this.getTextContent(this.headerTextLocator);
     }
 }

@@ -20,6 +20,6 @@
         ]
     },
     "extends": [
-        
+        "plugin:ui-testing/playwright"
     ]
 }
