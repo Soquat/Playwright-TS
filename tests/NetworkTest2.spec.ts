@@ -26,14 +26,13 @@ test('Login test', async ({ page }): Promise<void> => {
 
     await page.goto("https://rahulshettyacademy.com/client");
 
-
     await page.locator("button[routerlink*='myorders']").click();
-
 
     await page.route("https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=64184458568c3e9fb13763fa", async (route) => {
         await route.continue({
             url: "https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=64185b19568c3e9fb13782be"
         });
     });
-    await page.locator("button:has-text('View')").first().click();
+    expect(await page.locator("button:has-text('View')").first().textContent()).toContain("View");
+
 });

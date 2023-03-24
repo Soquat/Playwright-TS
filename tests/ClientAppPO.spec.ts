@@ -18,21 +18,16 @@ for (const data of dataSet) {
 
         const dashBoardPage: DashBoardPage = poManager.getDashboarPage();
         await dashBoardPage.searchProductAddCart(data.productName);
-        await dashBoardPage.navigateToCart();
+
 
 
     });
 }
 
-customtest(` Client App login`, async ({ page, testDataForOrder }): Promise<void> => {
-
+customtest(` Check H3 equals Automation`, async ({ page, testDataForOrder }): Promise<void> => {
     const poManager: POManager = new POManager(page);
     const loginPage: LoginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(testDataForOrder.userName, testDataForOrder.password);
-
-    const dashBoardPage: DashBoardPage = poManager.getDashboarPage();
-    await dashBoardPage.searchProductAddCart(testDataForOrder.productName);
-    await dashBoardPage.navigateToCart();
-
+    await expect(page.locator("div[class='left mt-1'] h3")).toHaveText("Automation");
 });

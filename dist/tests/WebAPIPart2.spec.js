@@ -48,6 +48,4 @@ test_1.test.beforeAll(async ({ browser }) => {
     await (0, test_1.expect)(page.locator(".user__name .input[type='text']")).toHaveValue(email);
     await page.locator(".action__submit").click();
     await (0, test_1.expect)(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
-    const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
-    console.log(orderId);
 });

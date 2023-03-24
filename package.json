@@ -8,7 +8,8 @@
     "test": "npx playwright test --headed",
     "webTests": "npx playwright test --grep @Web",
     "APITests": "npx playwright test --grep @API",
-    "SafariNewConfig": "npx playwright test --config playwright.config1.js --project=webkit"
+    "SafariNewConfig": "npx playwright test --config playwright.config1.js --project=webkit",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -28,13 +29,15 @@
     "@typescript-eslint/parser": "^5.56.0",
     "allure-playwright": "^2.1.0",
     "eslint": "^8.36.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^9.0.1"
+    "@cucumber/cucumber": "^9.0.1",
+    "eslint-plugin-ui-testing": "^2.0.1"
   },
+  "prepare": "husky install",
   "husky": {
     "hooks": {
       "pre-commit": "npx eslint ."

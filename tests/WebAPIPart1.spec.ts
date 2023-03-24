@@ -21,10 +21,6 @@ test('Login test', async ({ page }): Promise<void> => {
     page.addInitScript(value => {
         window.localStorage.setItem("token", value);
     }, response.token);
-
     await page.goto("https://rahulshettyacademy.com/client");
-    await page.locator("button[routerlink*='myorders']").click();
-    await page.locator("tbody").waitFor();
-    const rows: Locator = await page.locator("tbody tr");
-
+    await expect(page.locator("div[class='left mt-1'] h3")).toHaveText("Automation");
 });

@@ -63,8 +63,4 @@ test('Login test', async (): Promise<void> => {
     await page.locator(".action__submit").click();
 
     await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
-
-    const orderId: string | null = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
-    console.log(orderId);
-
 });

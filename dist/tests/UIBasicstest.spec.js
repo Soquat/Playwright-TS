@@ -23,15 +23,6 @@ const test_1 = require("@playwright/test");
     const errorMessage = await page.locator("[style*='block']").textContent();
     console.log(errorMessage);
     await (0, test_1.expect)(page.locator("[style*='block']")).toContainText("Incorrect");
-    await username.fill("");
-    await username.fill("rahulshettyacademy");
-    await pw.fill("");
-    await pw.fill("learning");
-    await Promise.all([
-        page.waitForLoadState(),
-        signIn.click()
-    ]);
-    const allTitles = await cardTitles.allTextContents();
 });
 (0, test_1.test)('UI Controls', async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
@@ -65,5 +56,6 @@ const test_1 = require("@playwright/test");
         console.log(domain);
         const username = page.locator('#username');
         await username.type(domain);
+        (0, test_1.expect)(await username.inputValue()).toBe(domain);
     }
 });

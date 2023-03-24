@@ -19,9 +19,13 @@ export default {
   use: {
     browserName: 'chromium',
     headless: true,
+
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
+    trace: 'on',
+    screenshot:'on',
+
   }
 };
 

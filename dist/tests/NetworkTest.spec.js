@@ -28,5 +28,5 @@ test_1.test.beforeAll(async () => {
         });
     });
     await page.locator('button[routerlink*="myorders"]').click();
-    console.log(await page.locator('.mt-4').textContent());
+    (0, test_1.expect)(await page.locator('.mt-4').textContent()).toContain("Loading...");
 });

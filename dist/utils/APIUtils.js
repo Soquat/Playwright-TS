@@ -13,7 +13,7 @@ class APIUtils {
         return token;
     }
     async createOrder(orderPayload) {
-        let response = {
+        const response = {
             token: "",
             orderId: ""
         };

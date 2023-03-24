@@ -40,5 +40,5 @@ test('Login test', async ({ page }): Promise<void> => {
     );
 
     await page.locator('button[routerlink*="myorders"]').click();
-    console.log(await page.locator('.mt-4').textContent());
+    expect(await page.locator('.mt-4').textContent()).toContain("Loading...");
 });

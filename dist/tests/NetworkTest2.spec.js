@@ -24,5 +24,5 @@ test_1.test.beforeAll(async () => {
             url: "https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=64185b19568c3e9fb13782be"
         });
     });
-    await page.locator("button:has-text('View')").first().click();
+    (0, test_1.expect)(await page.locator("button:has-text('View')").first().textContent()).toContain("View");
 });

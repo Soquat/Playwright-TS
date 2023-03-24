@@ -10,12 +10,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "ui-testing"
     ],
     "rules": {
         "semi": [
             "error",
             "always"
         ]
-    }
+    },
+    "extends": [
+        
+    ]
 }

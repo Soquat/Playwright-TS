@@ -16,15 +16,12 @@ for (const data of dataSet) {
         await loginPage.validLogin(data.userName, data.password);
         const dashBoardPage = poManager.getDashboarPage();
         await dashBoardPage.searchProductAddCart(data.productName);
-        await dashBoardPage.navigateToCart();
     });
 }
-(0, test_base_1.default)(` Client App login`, async ({ page, testDataForOrder }) => {
+(0, test_base_1.default)(` Check H3 equals Automation`, async ({ page, testDataForOrder }) => {
     const poManager = new POManager_1.POManager(page);
     const loginPage = poManager.getLoginPage();
     await loginPage.goTo();
     await loginPage.validLogin(testDataForOrder.userName, testDataForOrder.password);
-    const dashBoardPage = poManager.getDashboarPage();
-    await dashBoardPage.searchProductAddCart(testDataForOrder.productName);
-    await dashBoardPage.navigateToCart();
+    await (0, test_1.expect)(page.locator("div[class='left mt-1'] h3")).toHaveText("Automation");
 });

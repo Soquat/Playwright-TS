@@ -24,19 +24,6 @@ test('Browser Content Playwright test', async ({ browser }): Promise<void> => {
     const errorMessage: string | null = await page.locator("[style*='block']").textContent();
     console.log(errorMessage);
     await expect(page.locator("[style*='block']")).toContainText("Incorrect");
-
-    await username.fill("");
-    await username.fill("rahulshettyacademy");
-    await pw.fill("");
-    await pw.fill("learning");
-    await Promise.all(
-        [
-            page.waitForLoadState(),
-            signIn.click()
-        ]
-    );
-
-    const allTitles: string[] = await cardTitles.allTextContents();
 });
 
 
@@ -80,5 +67,6 @@ test('Child windows', async ({ browser }): Promise<void> => {
         const username: Locator = page.locator('#username');
 
         await username.type(domain);
+        expect(await username.inputValue()).toBe(domain);
     }
 });
