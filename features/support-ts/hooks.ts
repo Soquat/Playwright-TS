@@ -23,5 +23,4 @@ BeforeStep(function () {
 
 AfterStep(async function ({ result }) {
     console.log(result);
-
 });
