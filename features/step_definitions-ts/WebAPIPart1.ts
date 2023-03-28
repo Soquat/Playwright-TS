@@ -1,7 +1,6 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { APIUtils } from '../../utils/APIUtils';
 import { ILoginPayload } from '../../utils/interfaces/ILoginPayload';
-import { IOrderPayload } from '../../utils/interfaces/IOrderPayload';
 import { IOrderResponse } from '../../utils/interfaces/IOrderResponse';
 import { expect, request } from '@playwright/test';
 

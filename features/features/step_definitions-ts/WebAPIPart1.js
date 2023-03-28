@@ -9,7 +9,6 @@ const test_1 = require("@playwright/test");
     const apiUtils = new APIUtils_1.APIUtils(apiContext, loginPayload);
     const response = await apiUtils.createOrder({ orders: [] });
     this.token = response.token;
-    console.log(this.token);
 });
 (0, cucumber_1.When)('Setting token credentials', async function () {
     this.page = await this.poManager.getPage();
