@@ -7,13 +7,14 @@
             "esnext",
             "dom"
         ],
-        "outDir": "dist",
+        "outDir": "features",
         "strict": true,
         "esModuleInterop": true,
     },
     "include": [
-        "tests/**/*",
-        "pageObjects/**/*"
+        "features/step_definitions-ts/**/*",
+        "features/support-ts/**/*",
+        "features/*.feature"
     ],
     "exclude": [
         "node_modules"

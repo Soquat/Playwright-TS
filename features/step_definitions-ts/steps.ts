@@ -1,7 +1,6 @@
-const { Given, When, Then } = require("@cucumber/cucumber");
-const { POManager } = require('../../pageObjects/POManager');
-const { expect } = require('@playwright/test');
-const playwright = require('@playwright/test');
+import { POManager } from "../../pageObjects/POManager";
+import { expect } from "@playwright/test";
+import { Given, When, Then } from "@cucumber/cucumber";
 
 Given('a login to Ecommerce app with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
 
