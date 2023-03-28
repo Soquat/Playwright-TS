@@ -6,7 +6,7 @@ import { expect, request } from '@playwright/test';
 
 
 
-Given('I am logged in as {string} with password {string}', async function (email, password) {
+Given('I am logged in as {string} with password {string}', async function (email: string, password: string): Promise<void> {
     const loginPayload: ILoginPayload = { userEmail: email, userPassword: password };
     const apiContext = await request.newContext();
     const apiUtils = new APIUtils(apiContext, loginPayload);
@@ -14,7 +14,7 @@ Given('I am logged in as {string} with password {string}', async function (email
     this.token = response.token;
 });
 
-When('Setting token credentials', async function () {
+When('Setting token credentials', async function (): Promise<void> {
     this.page = await this.poManager.getPage();
     this.page.addInitScript((value: string) => {
         window.localStorage.setItem("token", value);
@@ -23,7 +23,7 @@ When('Setting token credentials', async function () {
 
 });
 
-Then('I should see {string} on the dashboard page', async function (expectedText) {
+Then('I should see {string} on the dashboard page', async function (expectedText: string): Promise<void> {
     await expect(this.page.locator("div[class='left mt-1'] h3")).toHaveText(expectedText);
 });
 

@@ -1,12 +1,12 @@
 import { expect, Locator } from "@playwright/test";
 import { Given, When, Then } from "@cucumber/cucumber";
 
-Given('a login to practice site', async function () {
+Given('a login to practice site', async function (): Promise<void> {
     this.page = await this.poManager.getPage();
     await this.page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 });
 
-When('I enter username with {string} and {string}', async function (userName, password) {
+When('I enter username with {string} and {string}', async function (userName: string, password: string): Promise<void> {
     const username: Locator = this.page.locator('#username');
     const pw: Locator = this.page.locator("[type='password']");
     const signIn: Locator = this.page.locator("#signInBtn");
@@ -15,7 +15,6 @@ When('I enter username with {string} and {string}', async function (userName, pa
     await signIn.click();
 });
 
-Then('I should see error message {string}', async function (invalidMessage) {
-    const errorMessage: string | null = await this.page.locator("[style*='block']").textContent();
-    await expect(this.page.locator("[style*='block']")).toContainText("Incorrect");
+Then('I should see error message {string}', async function (invalidMessage: string): Promise<void> {
+    await expect(this.page.locator("[style*='block']")).toContainText(invalidMessage);
 });

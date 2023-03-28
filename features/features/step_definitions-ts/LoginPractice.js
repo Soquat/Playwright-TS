@@ -15,6 +15,5 @@ const cucumber_1 = require("@cucumber/cucumber");
     await signIn.click();
 });
 (0, cucumber_1.Then)('I should see error message {string}', async function (invalidMessage) {
-    const errorMessage = await this.page.locator("[style*='block']").textContent();
-    await (0, test_1.expect)(this.page.locator("[style*='block']")).toContainText("Incorrect");
+    await (0, test_1.expect)(this.page.locator("[style*='block']")).toContainText(invalidMessage);
 });

@@ -15,7 +15,6 @@ const cucumber_1 = require("@cucumber/cucumber");
     await (0, test_1.expect)(this.page.locator("#displayed-text")).toBeVisible();
     let textbox = await this.page.locator("#hide-textbox");
     await textbox.click();
-    //await textbox.screenshot({ path: "screenshot.png" });
 });
 (0, cucumber_1.Then)('Displayed text should be invisible', async function () {
     await (0, test_1.expect)(this.page.locator("#displayed-text")).toBeHidden();
